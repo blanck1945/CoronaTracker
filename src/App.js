@@ -2,7 +2,6 @@ import React from 'react';
 import { Provider } from "react-redux"
 
 //Components imports
-import NavBaar from './Components/Navbar/NavBaar';
 import CardDisplay from './Components/CardDisplay/CardDisplay';
 import Chart from './Components/Chart/Chart';
 
@@ -19,7 +18,6 @@ const App = () => {
   return (
     <Provider store={store}>
       <div className="app">
-        <NavBaar />
         <CardDisplay />
         <Chart />
       </div>
