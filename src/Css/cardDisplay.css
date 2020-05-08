@@ -1,6 +1,37 @@
 .cardDisplay {
-    background: green;
+    background: rgb(235, 235, 235);
     height: 180px;
     width: 70%;
     margin: auto;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-evenly;
+    border-radius: 5px;
+}
+
+.green {
+    border-bottom: 3px solid rgb(18, 146, 18);
+}
+
+.blue {
+    border-bottom: 3px solid rgb(20, 20, 116);
+}
+
+.red {
+    border-bottom: 3px solid rgb(131, 13, 13);
+}
+
+.loading {
+    height: 170px;
+    width: 170px;
+    margin: auto;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.card {
+    height: 160px;
+    width: 220px;
 }

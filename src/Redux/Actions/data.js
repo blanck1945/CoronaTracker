@@ -1,5 +1,5 @@
 import { SET_WORLD, SET_USA } from "./../Types"
-import { axiosGetData } from "./../../Api/axios"
+import axios from "axios"
 
 export const getDataWorld = data => ({
     type: SET_WORLD,
@@ -11,11 +11,13 @@ export const getDataUsa = data => ({
     data
 })
 
+const worldURL = "https://api.thevirustracker.com/free-api?global=stats"
+
 export const fetchData = () => {
     return async dispatch => {
         try {
-            const res = await axiosGetData()
-            dispatch(res.data)
+            const res = await axios.get(worldURL)
+            dispatch(getDataWorld(res.data.results))
             ///remove errors
         }
         catch (err) {
