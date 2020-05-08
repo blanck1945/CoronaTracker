@@ -10,6 +10,7 @@ import './App.css';
 import "./Css/NavBar.css"
 import "./Css/cardDisplay.css"
 import "./Css/Chart.css"
+import "./Css/btnDisplay.css"
 
 //Redux imports
 import { store } from "./Redux/Store"

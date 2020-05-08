@@ -1,8 +1,11 @@
-import { SET_WORLD, SET_USA, LINE_USA } from "../Types"
+import { SET_WORLD, GET_COUNTRY, LINE_COUNTRY } from "../Types"
 
 const initialState = {
+    worldBar: [],
     barData: [],
-    lineData: []
+    lineData: "",
+    world: true,
+    country: false
 }
 
 const dataReducer = (state = initialState, action) => {
@@ -10,17 +13,21 @@ const dataReducer = (state = initialState, action) => {
         case SET_WORLD:
             return {
                 ...state,
-                barData: action.data
+                barData: action.data,
+                world: true,
+                country: false
             }
-        case SET_USA:
+        case GET_COUNTRY:
             return {
                 ...state,
-                barData: action.data
+                barData: action.data,
+                world: false,
+                country: true
             }
-        case LINE_USA:
+        case LINE_COUNTRY:
             return {
                 ...state,
-                lineData: action.data
+                lineData: action.data,
             }
         default:
             return state

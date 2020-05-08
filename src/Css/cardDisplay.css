@@ -35,3 +35,35 @@
     height: 160px;
     width: 220px;
 }
+
+.searchBox {
+    background: white;
+    height: 50px;
+    width: 300px;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-evenly;
+    position: absolute;
+    left: 620px;
+    top: 180px;
+}
+
+.crim {
+    background: crimson;
+    color: rgb(228, 228, 228);
+}
+
+.findBtn {
+    border-radius: 4px;
+    font-size: 0.9rem;
+    padding: 7px 19px;
+    cursor: pointer;
+    border: none;
+    outline: none;
+}
+
+.countries {
+    height: 30px;
+    width: 120px;
+}

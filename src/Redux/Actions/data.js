@@ -1,5 +1,6 @@
-import { SET_WORLD, SET_USA, LINE_USA } from "./../Types"
+import { SET_WORLD, GET_COUNTRY, LINE_COUNTRY } from "./../Types"
 import { setError, removeError } from "./../Actions/errors"
+import { worldURL, courtryURL, countryLIne } from "./../../utils/ApiURL"
 import axios from "axios"
 
 export const getDataWorld = data => ({
@@ -7,25 +8,21 @@ export const getDataWorld = data => ({
     data
 })
 
-export const getDataUsa = data => ({
-    type: SET_USA,
+export const getDataCountry = data => ({
+    type: GET_COUNTRY,
     data
 })
 
-export const setUsaLine = data => ({
-    type: LINE_USA,
+export const setCountryLine = data => ({
+    type: LINE_COUNTRY,
     data
 })
-
-const worldURL = "https://api.thevirustracker.com/free-api?global=stats"
-
-const usaURL = "https://api.thevirustracker.com/free-api?countryTotal=US"
-const usaLineURL = "https://api.thevirustracker.com/free-api?countryTimeline=US"
 
 export const fetchData = () => {
     return async dispatch => {
         try {
             const res = await axios.get(worldURL)
+            console.log(res)
             dispatch(getDataWorld(res.data.results))
             dispatch(removeError())
         }
@@ -36,11 +33,12 @@ export const fetchData = () => {
     }
 }
 
-export const fetchUsa = () => {
+export const fetchCountry = code => {
     return async dispatch => {
         try {
-            const res = await axios.get(usaURL)
-            dispatch(getDataUsa(res.data))
+            const res = await axios.get(courtryURL + `${code}`)
+            console.log(res.data)
+            dispatch(getDataCountry(res.data.countrydata))
             dispatch(removeError())
         }
         catch (err) {
@@ -50,11 +48,11 @@ export const fetchUsa = () => {
     }
 }
 
-export const fetchUsaLine = () => {
+export const fetchLineCountry = code => {
     return async dispatch => {
         try {
-            const res = await axios.get(usaLineURL)
-            dispatch(setUsaLine(res.data.timelineitems))
+            const res = await axios.get(countryLIne + `${code}`)
+            dispatch(setCountryLine(res.data.timelineitems))
             dispatch(removeError())
         }
         catch (err) {

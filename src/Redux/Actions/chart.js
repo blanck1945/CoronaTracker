@@ -1,4 +1,8 @@
-import { BAR_CHART, LINE_CHART } from "./../Types"
+import { BAR_CHART, LINE_CHART, WORLD_BAR } from "./../Types"
+
+export const setWorldBar = () => ({
+    type: WORLD_BAR
+})
 
 export const setBar = () => ({
     type: BAR_CHART
