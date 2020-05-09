@@ -1,32 +1,33 @@
 import React from 'react'
 import { Bar, Line } from "react-chartjs-2"
-import { useSelector, useDispatch } from 'react-redux'
-import { setBar, setLine } from "./../../Redux/Actions/chart"
-import { usePromiseTracker } from "react-promise-tracker"
+import { useSelector } from 'react-redux'
+import { usePromiseTracker } from "react-promise-tracker";
 import CircularProgress from '@material-ui/core/CircularProgress';
+
 
 const Chart = () => {
 
-    const { promiseInProgress } = usePromiseTracker()
-
-    const select = useSelector(state => state.select)
-    console.log(select)
-    const active = useSelector(state => state.dataReducer.barData)
-    console.log(active)
-    const lineActive = useSelector(state => state.dataReducer.lineData)
-    const world = useSelector(state => state.dataReducer.world)
-
-    const dispatch = useDispatch({ setBar, setLine })
-
+    const { promiseInProgress } = usePromiseTracker();
+    const reducer = useSelector(state => state.dataReducer)
+    const load = useSelector(state => state.loading.loading)
+    const {
+        barData,
+        worldBar,
+        lineData,
+        world,
+        bar,
+        line
+    } = reducer
+    console.log(load)
     const data = {
         labels: ["Total Cases", "Total Recovered", "Total Deaths"],
         datasets: [
             {
-                label: "Bar Chart",
+                label: "WorldWide Stats",
                 data: [
-                    active[0] && active[0].total_cases,
-                    active[0] && active[0].total_recovered,
-                    active[0] && active[0].total_deaths,
+                    world ? worldBar.total_cases : barData.total_cases,
+                    world ? worldBar.total_recovered : barData.total_recovered,
+                    world ? worldBar.total_deaths : barData.total_deaths,
                 ],
                 backgroundColor: [
                     "rgb(18, 146, 18)",
@@ -44,29 +45,20 @@ const Chart = () => {
         }
     }
 
-    const handlerClick = () => {
-        if (select.bar === true && world === false) {
-            dispatch(setLine())
-        }
-        else {
-            dispatch(setBar())
-        }
-    }
-
     const cases = []
-    lineActive && Object.values(lineActive[0]).map(el => cases.push(el.total_cases))
+    lineData && Object.values(lineData[0]).map(el => cases.push(el.total_cases))
     const recovery = []
-    lineActive && Object.values(lineActive[0]).map(el => recovery.push(el.new_daily_cases))
+    lineData && Object.values(lineData[0]).map(el => recovery.push(el.new_daily_cases))
     const deaths = []
-    lineActive && Object.values(lineActive[0]).map(el => deaths.push(el.total_deaths))
+    lineData && Object.values(lineData[0]).map(el => deaths.push(el.total_deaths))
     const dates = []
-    lineActive && Object.keys(lineActive[0]).map(el => dates.push(el))
+    lineData && Object.keys(lineData[0]).map(el => dates.push(el))
 
-    const line = {
+    const lineChart = {
         labels: dates,
         datasets: [
             {
-                label: select.line ? active[0].info.title + " Total Cases" : "country",
+                label: "Total Cases",
                 data: cases,
                 borderColor: "rgb(18, 146, 18)",
                 pointBorderColor: "none",
@@ -74,13 +66,13 @@ const Chart = () => {
                 fill: false
             },
             {
-                label: select.line ? active[0].info.title + " Recovered Cases" : "country",
+                label: "Recovered Cases",
                 data: recovery,
                 borderColor: "rgb(20, 20, 116)",
                 fill: false
             },
             {
-                label: select.line ? active[0].info.title + " Death Cases" : "country",
+                label: "Death Cases",
                 data: deaths,
                 borderColor: "rgb(131, 13, 13",
                 fill: false
@@ -88,25 +80,18 @@ const Chart = () => {
         ]
     }
 
-    console.log(select.world)
-
     return (
-        <div className="chart" >
-            <div className="btnBox">
-                {select.bar
-                    ? <button className="searchBtn select">BAR</button>
-                    : <button onClick={handlerClick} className="searchBtn">BAR</button>}
-                {select.bar
-                    ? <button onClick={handlerClick} className="searchBtn">LINE</button>
-                    : <button className="searchBtn select">LINE</button>}
-            </div>
-            {select.world ? <Bar data={data} height={120} /> : null}
-            {select.bar ? <Bar data={data} height={120} /> : null
+        <>
+            {promiseInProgress
+                ? <div className="porgBox"><CircularProgress color="secondary" className="prog" /></div>
+                :
+                <div className="chart">
+                    {world && <Bar data={data} height={118} />}
+                    {line && <Line data={lineChart} height={118} />}
+                    {bar && <Bar data={data} height={118} />}
+                </div>
             }
-            {select.line
-                ? promiseInProgress ? <CircularProgress /> : <Line data={line} height={120} />
-                : null}
-        </div >
+        </>
     )
 }
 

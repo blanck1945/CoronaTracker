@@ -1,7 +1,7 @@
 .cardDisplay {
     background: rgb(235, 235, 235);
-    height: 180px;
-    width: 70%;
+    min-height: 180px;
+    min-width: 70%;
     margin: auto;
     display: flex;
     flex-direction: row;
@@ -47,20 +47,6 @@
     position: absolute;
     left: 620px;
     top: 180px;
-}
-
-.crim {
-    background: crimson;
-    color: rgb(228, 228, 228);
-}
-
-.findBtn {
-    border-radius: 4px;
-    font-size: 0.9rem;
-    padding: 7px 19px;
-    cursor: pointer;
-    border: none;
-    outline: none;
 }
 
 .countries {

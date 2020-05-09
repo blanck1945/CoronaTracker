@@ -4,23 +4,12 @@
     margin: auto;
 }
 
-.btnBox {
-    margin-left: 70px;
-    margin-top: 10px;
-}
-
-.searchBtn {
-    border: none;
-    cursor: pointer;
-    height: 30px;
-    width: 80px;
-    margin-left: 10px;
-    border-radius: 4px;
-    color: rgb(95, 95, 95);
-    outline: none;
-}
-
-.select {
-    background: rgb(100, 99, 99);
-    color: rgb(219, 219, 219);
+.porgBox {
+    margin: auto;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    height: 180px;
+    width: 50px;
 }

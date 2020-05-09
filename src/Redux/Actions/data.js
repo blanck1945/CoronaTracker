@@ -1,5 +1,6 @@
 import { SET_WORLD, GET_COUNTRY, LINE_COUNTRY } from "./../Types"
 import { setError, removeError } from "./../Actions/errors"
+import { loadOn, loadOff } from "./loading"
 import { worldURL, courtryURL, countryLIne } from "./../../utils/ApiURL"
 import axios from "axios"
 
@@ -8,23 +9,24 @@ export const getDataWorld = data => ({
     data
 })
 
-export const getDataCountry = data => ({
+export const getDataCountry = (data) => ({
     type: GET_COUNTRY,
-    data
+    data,
 })
 
-export const setCountryLine = data => ({
+export const setCountryLine = (data) => ({
     type: LINE_COUNTRY,
-    data
+    data,
 })
 
 export const fetchData = () => {
     return async dispatch => {
         try {
+            dispatch(loadOn())
             const res = await axios.get(worldURL)
-            console.log(res)
-            dispatch(getDataWorld(res.data.results))
+            dispatch(getDataWorld(res.data.results[0]))
             dispatch(removeError())
+            dispatch(loadOff())
         }
         catch (err) {
             const error = err.response
@@ -36,10 +38,11 @@ export const fetchData = () => {
 export const fetchCountry = code => {
     return async dispatch => {
         try {
+            dispatch(loadOn())
             const res = await axios.get(courtryURL + `${code}`)
-            console.log(res.data)
-            dispatch(getDataCountry(res.data.countrydata))
+            dispatch(getDataCountry(res.data.countrydata[0]))
             dispatch(removeError())
+            dispatch(loadOff())
         }
         catch (err) {
             const error = err.response
@@ -51,9 +54,11 @@ export const fetchCountry = code => {
 export const fetchLineCountry = code => {
     return async dispatch => {
         try {
+            dispatch(loadOn())
             const res = await axios.get(countryLIne + `${code}`)
             dispatch(setCountryLine(res.data.timelineitems))
             dispatch(removeError())
+            dispatch(loadOff())
         }
         catch (err) {
             const error = err.response

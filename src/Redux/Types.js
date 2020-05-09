@@ -9,9 +9,9 @@ export const LINE_COUNTRY = "LINE_COUNTRY"
 export const SET_ERROR = "SET_ERROR"
 export const REMOVE_ERROR = "REMOVE_ERROR"
 
-//Charts types
-export const LINE_CHART = "LINE_CHART"
-export const BAR_CHART = "BAR_CHART"
+//loading types
+export const LOAD_OPEN = "LOAD_OPEN"
+export const LOAD_CLOSE = "LOAD_CLOSE"
 
 //Setting options
 export const SET_OPTIONS = "SET_OPTIONS"

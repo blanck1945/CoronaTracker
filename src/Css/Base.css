@@ -1,0 +1,67 @@
+.baseCSS {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-evenly;
+    margin-top: 10px;
+}
+
+.btnBox {
+    margin-left: 70px;
+    margin-top: 10px;
+    display: flex;
+    justify-content: space-between;
+}
+
+.searchBtn {
+    border: none;
+    cursor: pointer;
+    height: 30px;
+    width: 80px;
+    margin-left: 10px;
+    border-radius: 4px;
+    color: rgb(95, 95, 95);
+    outline: none;
+}
+
+.select {
+    background: rgb(100, 99, 99);
+    color: rgb(219, 219, 219);
+}
+
+.loadingChart {
+    height: 300px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.card {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-evenly;
+}
+
+.countryDisplay {
+    background: rgb(194, 194, 194);
+    width: 240px;
+    color: rgb(20, 13, 88);
+    margin-right: 60px;
+    padding: 3px;
+}
+
+.crim {
+    background: crimson;
+    color: rgb(228, 228, 228);
+}
+
+.findBtn {
+    border-radius: 4px;
+    font-size: 0.9rem;
+    margin: 0 5px;
+    padding: 7px 19px;
+    cursor: pointer;
+    border: none;
+    outline: none;
+}
